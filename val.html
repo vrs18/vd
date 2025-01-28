@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be My Valentine?</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #ffebee;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .flower {
+      position: absolute;
+      width: 60px; /* Default size */
+      height: auto;
+      animation: fall 5s linear infinite;
+      opacity: 0.8; /* Slightly transparent */
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    .bouquet {
+      text-align: center;
+      z-index: 10;
+    }
+
+    .bouquet img {
+      width: 200px;
+      height: auto;
+    }
+
+    .note {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      z-index: 20;
+      margin-top: 20px;
+    }
+
+    .note h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #ff4081;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .options {
+      margin-top: 20px;
+    }
+
+    .options button {
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .options button:hover {
+      background-color: #ff79a8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Flowers falling -->
+  <div id="flowers"></div>
+
+  <!-- Bouquet and note -->
+  <div class="bouquet">
+    <img src="https://purepng.com/public/uploads/large/purepng.com-bouquet-of-flowersbouquetflowersbasket-of-flowersclusterbunch-1701527697181mirzp.png" alt="Bouquet">
+    <div class="note" onclick="revealNote()">
+      <h2>Click to Reveal</h2>
+    </div>
+  </div>
+
+  <!-- Hidden message -->
+  <div id="message" class="hidden">
+    <h2>Will you be my Valentine?</h2>
+    <div class="options">
+      <button onclick="respond('Yes')">Yes</button>
+      <button onclick="respond('Absolutely')">Absolutely</button>
+      <button onclick="respond('Yes, I love you')">Yes, I love you</button>
+      <button onclick="respond('Absolutely, I love you')">Absolutely, I love you</button>
+    </div>
+  </div>
+
+  <script>
+    // Create falling flowers
+    const flowersContainer = document.getElementById('flowers');
+    const flowerImages = [
+      'https://www.pngarts.com/files/1/Daisy-Purple-Download-Transparent-PNG-Image.png', // Replace with your flower image URLs
+      'http://clipart-library.com/images_k/red-rose-transparent-background/red-rose-transparent-background-8.png',
+      'https://www.pngall.com/wp-content/uploads/7/Yellow-Dandelion-PNG-Picture.png'
+    ];
+
+    for (let i = 0; i < 50; i++) {
+      const flower = document.createElement('img');
+      flower.src = flowerImages[Math.floor(Math.random() * flowerImages.length)]; // Random flower image
+      flower.classList.add('flower');
+      flower.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+      flower.style.animationDuration = `${Math.random() * 3 + 2}s`; // Random fall speed
+      flower.style.width = `${Math.random() * 20 + 10}px`; // Random size between 10px and 30px
+      flowersContainer.appendChild(flower);
+    }
+
+    // Reveal the note
+    function revealNote() {
+      document.querySelector('.note').classList.add('hidden');
+      document.getElementById('message').classList.remove('hidden');
+    }
+
+    // Handle response
+    function respond(response) {
+      alert(`You said: "${response}"! 💖 Thank you, my love!`);
+    }
+  </script>
+</body>
+</html>
